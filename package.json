@@ -1,0 +1,19 @@
+{
+  "name": "table-pivoting-kata",
+  "version": "0.0.1",
+  "description": "A kata for table pivoting in JavaScript.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "mocha --reporter spec",
+    "watch": "mocha --reporter min --watch --recursive test/"
+  },
+  "author": "Gordon Grant <gordongrant@dispostable.com>",
+  "license": "MIT",
+  "dependencies": {
+    "chai": "^2.0.0",
+    "console.table": "^0.7.0",
+    "mocha": "^2.0.1",
+    "sinon": "^1.12.1",
+    "sinon-chai": "^2.7.0"
+  }
+}
