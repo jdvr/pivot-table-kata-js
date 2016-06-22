@@ -46,6 +46,11 @@ Bajamos el proyecto, descomprimimos en un directorio, etc. Abrimos un terminal e
 
 Para instalar las dependencias propias del proyecto.
 
+
+NOTA: Si queremos trabajar directamente sobre el repositorio, nos lo clonamos, recordamos añadir al
+gitignore las carpetas `node_modules` y `.c9`, **empezamos una nueva rama** y trabajamos siempre sobre
+la nueva rama para dejar el ejercicio original disponible para otros.
+
 Una vez hecho esto podemos:
 
  - Ver el proyecto en marcha ejecutando `node src/index.js`. Saldrán por consola dos tablas iguales.
