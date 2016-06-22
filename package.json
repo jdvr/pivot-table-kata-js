@@ -4,6 +4,7 @@
   "description": "A kata for table pivoting in JavaScript.",
   "main": "src/index.js",
   "scripts": {
+    "main": "node src/index.js",
     "test": "mocha --reporter spec",
     "watch": "mocha --reporter min --watch --recursive test/"
   },

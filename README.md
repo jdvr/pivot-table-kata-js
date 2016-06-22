@@ -31,7 +31,7 @@ He dejado preparadas las siguientes partes:
 
  - Un _dominio_ (`src/domain/`) que contiene 3 objetos: Table, Row, y Cell. Más abajo describo su API. En general los tres producen objetos inmutables, de modo que cualqueir operación que suponga modificación resultará en un nuevo objeto del tipo correspondiente.
  - Nuestro campo de trabajo es el módulo `src/processing/pivot.js` que debe exportar una función única `pivot` que realiza el pivotaje. De partida la función simplemente devuelve la misma tabla recibida, tal cual.
- - Hay un `src/index.js` y un par de utilidades (`src/view/`) por si se quiere tener algo con apariencia de proyecto real.
+ - Hay un `src/index.js` y un par de utilidades (`src/view/`) por si se quiere tener algo con apariencia de proyecto real. (Se puede ejecutar con `npm run main`.)
  - Además hay unos tests básicos (`test/`) que sirven como punto de partida para empezar a trabajar.
 
 ## Cómo empezar
