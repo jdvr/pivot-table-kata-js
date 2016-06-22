@@ -5,6 +5,8 @@ var Table = require('../src/domain/table.js');
 var Row = require('../src/domain/row.js');
 var Cell = require('../src/domain/cell.js');
 
+var pivot = require('../src/processing/pivot.js').pivot;
+
     
 var originalTable, expectedTable, emptyTable;
 var originalHeader, pivotedHeader;
@@ -72,6 +74,24 @@ describe('A Cell...', function () {
     });
 });
 
+describe('When pivoting a Table...', function() {
+    beforeEach(function() {
+        createTestTables();
+    });
+    it('The pivoted table should have the expected number of columns', function () {
+        var pivotedTable = pivot(originalTable);
+        expect(pivotedTable.numCols()).to.equal(expectedTable.numCols());
+    });
+    it('The pivoted table should have the expected number of rows', function () {
+        var pivotedTable = pivot(originalTable);
+        expect(pivotedTable.numRows()).to.equal(expectedTable.numRows());
+    });
+    it('The pivoted table should have the expected header', function () {
+        var pivotedTable = pivot(originalTable);
+        expect(pivotedTable.header).to.deep.equal(expectedTable.header);
+    });
+
+});
 
 /* -- -- Building Test Fixtures -- -- */
 

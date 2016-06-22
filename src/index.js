@@ -6,22 +6,34 @@ var pivot = require('./processing/pivot.js').pivot;
 
 var render = require('./view/renderer.js').render;
 
-var row0 = new Row([new Cell("Web", "News"), new Cell("Mes", "Enero"), new Cell("Visitas", 4)]);
-var row1 = new Row([new Cell("Web", "News"), new Cell("Mes", "Febrero"), new Cell("Visitas", 14)]);
-var row2 = new Row([new Cell("Web", "News"), new Cell("Mes", "Marzo"), new Cell("Visitas", 8)]);
-var row3 = new Row([new Cell("Web", "News"), new Cell("Mes", "Abril"), new Cell("Visitas", 321)]);
-var row4 = new Row([new Cell("Web", "com"), new Cell("Mes", "Enero"), new Cell("Visitas", 2)]);
-var row5 = new Row([new Cell("Web", "com"), new Cell("Mes", "Febrero"), new Cell("Visitas", 4)]);
-var row6 = new Row([new Cell("Web", "com"), new Cell("Mes", "Marzo"), new Cell("Visitas", 19)]);
-var row7 = new Row([new Cell("Web", "com"), new Cell("Mes", "Abril"), new Cell("Visitas", 21)]);
+var Enero = function(val) { return new Cell("ENERO", val); };
+var Febrero = function(val) { return new Cell("FEBRERO", val); };
+var Marzo = function(val) { return new Cell("MARZO", val); };
+var Abril = function(val) { return new Cell("ABRIL", val); };
+var Fecha = function(val) { return new Cell("FECHA", val); };
+var Valor = function(val) { return new Cell("VALOR", val); };
+var Gestor = function(val) { return new Cell("GESTOR", val); };
+var Linea = function(val) { return new Cell("LINEA", val); };
 
-var table = new Table(["Mes", "Visitas"], [row0, row1, row2, row3, row4, row5, row6, row7]);
+var header = ["GESTOR", "LINEA", "FECHA", "VALOR"];
+
+var rows = [
+    new Row([Gestor("Sam"), Linea("Segunda Mano"), Fecha("ENERO"), Valor(20)]),
+    new Row([Gestor("Sam"), Linea("Segunda Mano"), Fecha("FEBRERO"), Valor(21)]),
+    new Row([Gestor("Sam"), Linea("Segunda Mano"), Fecha("MARZO"), Valor(22)]),
+    new Row([Gestor("Sam"), Linea("Segunda Mano"), Fecha("ABRIL"), Valor(25)]),
+    new Row([Gestor("Max"), Linea("Segunda Mano"), Fecha("ENERO"), Valor(30)]),
+    new Row([Gestor("Max"), Linea("Segunda Mano"), Fecha("FEBRERO"), Valor(31)]),
+    new Row([Gestor("Max"), Linea("Segunda Mano"), Fecha("MARZO"), Valor(32)]),
+    new Row([Gestor("Max"), Linea("Segunda Mano"), Fecha("ABRIL"), Valor(35)])
+];
+
+var table = new Table(header, rows);
 
 render(table);
 
-console.log("Ahora pivotamos...");
+console.log("Pivotamos...\n");
 
-var pivotedTable = pivot(table, "Mes", "Visitas");
-
+var pivotedTable = pivot(table, "FECHA", "VALOR");
 
 render(pivotedTable);
