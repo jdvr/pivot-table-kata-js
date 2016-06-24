@@ -20,7 +20,6 @@ var rows = [
     new Row([Gestor("Sam"), Linea("Segunda Mano"), Fecha("MARZO"), Valor(22)]),
     new Row([Gestor("Sam"), Linea("Segunda Mano"), Fecha("ABRIL"), Valor(25)]),
     new Row([Gestor("Max"), Linea("Segunda Mano"), Fecha("ENERO"), Valor(30)]),
-    new Row([Gestor("Max"), Linea("Segunda Mano"), Fecha("FEBRERO"), Valor(31)]),
     new Row([Gestor("Max"), Linea("Segunda Mano"), Fecha("MARZO"), Valor(32)]),
     new Row([Gestor("Max"), Linea("Segunda Mano"), Fecha("ABRIL"), Valor(35)])
 ];
