@@ -5,15 +5,12 @@ var Cell = require('./domain/cell.js');
 var pivot = require('./processing/pivot.js').pivot;
 
 var render = require('./view/renderer.js').render;
+//var inspect = require('./view/renderer.js').inspect;
 
-var Enero = function(val) { return new Cell("ENERO", val); };
-var Febrero = function(val) { return new Cell("FEBRERO", val); };
-var Marzo = function(val) { return new Cell("MARZO", val); };
-var Abril = function(val) { return new Cell("ABRIL", val); };
-var Fecha = function(val) { return new Cell("FECHA", val); };
-var Valor = function(val) { return new Cell("VALOR", val); };
-var Gestor = function(val) { return new Cell("GESTOR", val); };
-var Linea = function(val) { return new Cell("LINEA", val); };
+var Celda = function(nombre) { return function(valor) { return new Cell(nombre, valor); }; };
+var Enero = Celda("ENERO"); var Febrero = Celda("FEBRERO"); var Marzo = Celda("MARZO"); var Abril = Celda("ABRIL");
+var Fecha = Celda("FECHA"); var Valor = Celda("VALOR"); var Gestor = Celda("GESTOR"); var Linea = Celda("LINEA");
+
 
 var header = ["GESTOR", "LINEA", "FECHA", "VALOR"];
 
@@ -30,6 +27,7 @@ var rows = [
 
 var table = new Table(header, rows);
 
+//inspect(table);
 render(table);
 
 console.log("Pivotamos...\n");
