@@ -1,4 +1,5 @@
 function Table(header, rows) {
+	header = header.slice(0); rows = rows.slice(0);
 	Object.defineProperty(this, 'header', {
 		get: function() {
 			return header.slice(0);

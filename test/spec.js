@@ -79,35 +79,37 @@ describe('When pivoting a Table...', function() {
         createTestTables();
     });
     it('The pivoted table should have the expected number of columns', function () {
-        var pivotedTable = pivot(originalTable);
+        var pivotedTable = pivot(originalTable, "FECHA", "VALOR");
         expect(pivotedTable.numCols()).to.equal(expectedTable.numCols());
     });
     it('The pivoted table should have the expected number of rows', function () {
-        var pivotedTable = pivot(originalTable);
+        var pivotedTable = pivot(originalTable, "FECHA", "VALOR");
         expect(pivotedTable.numRows()).to.equal(expectedTable.numRows());
     });
     it('The pivoted table should have the expected header', function () {
-        var pivotedTable = pivot(originalTable);
+        var pivotedTable = pivot(originalTable, "FECHA", "VALOR");
         expect(pivotedTable.header).to.deep.equal(expectedTable.header);
+    });
+    it('The pivoted table should have the expected content', function() {
+        var pivotedTable = pivot(originalTable, "FECHA", "VALOR");
+        var pivotedCellNameAt14 = pivotedTable.row(1).nameAt(4);
+        var pivotedCellValueAt14 = pivotedTable.row(1).valueAt(4);
+        expect(pivotedCellNameAt14).to.equal("FEBRERO");
+        expect(pivotedCellValueAt14).to.equal(31);
     });
 
 });
 
 /* -- -- Building Test Fixtures -- -- */
 
-var Enero = function(val) { return new Cell("ENERO", val); };
-var Febrero = function(val) { return new Cell("FEBRERO", val); };
-var Marzo = function(val) { return new Cell("MARZO", val); };
-var Abril = function(val) { return new Cell("ABRIL", val); };
-var Fecha = function(val) { return new Cell("FECHA", val); };
-var Valor = function(val) { return new Cell("VALOR", val); };
-var Gestor = function(val) { return new Cell("GESTOR", val); };
-var Linea = function(val) { return new Cell("LINEA", val); };
+var Celda = function(nombre) { return function(valor) { return new Cell(nombre, valor); }; };
+var Enero = Celda("ENERO"); var Febrero = Celda("FEBRERO"); var Marzo = Celda("MARZO"); var Abril = Celda("ABRIL");
+var Fecha = Celda("FECHA"); var Valor = Celda("VALOR"); var Gestor = Celda("GESTOR"); var Linea = Celda("LINEA");
 
 function createTestTables() {
         originalHeader = ["GESTOR", "LINEA", "FECHA", "VALOR"];
         pivotedHeader = ["GESTOR", "LINEA", "ENERO", "FEBRERO", "MARZO", "ABRIL"];
-        
+
         originalRows = [
             new Row([Gestor("Sam"), Linea("Segunda Mano"), Fecha("ENERO"), Valor(20)]),
             new Row([Gestor("Sam"), Linea("Segunda Mano"), Fecha("FEBRERO"), Valor(21)]),
@@ -122,7 +124,7 @@ function createTestTables() {
             new Row([Gestor("Sam"), Linea("Segunda Mano"), Enero(20), Febrero(21), Marzo(22), Abril(25)]),
             new Row([Gestor("Max"), Linea("Segunda Mano"), Enero(30), Febrero(31), Marzo(32), Abril(35)])
         ];
-        
+
         originalTable = new Table(originalHeader, originalRows);
         expectedTable = new Table(pivotedHeader, pivotedRows);
         emptyTable = new Table(originalHeader, []);
