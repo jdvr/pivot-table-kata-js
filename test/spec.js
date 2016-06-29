@@ -78,13 +78,13 @@ describe('When pivoting a Table...', function() {
     beforeEach(function() {
         createTestTables();
     });
-    it('The pivoted table should have the expected number of columns', function () {
-        var pivotedTable = pivot(originalTable, "FECHA", "VALOR");
-        expect(pivotedTable.numCols()).to.equal(expectedTable.numCols());
-    });
     it('The pivoted table should have the expected number of rows', function () {
         var pivotedTable = pivot(originalTable, "FECHA", "VALOR");
         expect(pivotedTable.numRows()).to.equal(expectedTable.numRows());
+    });
+    it('The pivoted table should have the expected number of columns', function () {
+        var pivotedTable = pivot(originalTable, "FECHA", "VALOR");
+        expect(pivotedTable.numCols()).to.equal(expectedTable.numCols());
     });
     it('The pivoted table should have the expected header', function () {
         var pivotedTable = pivot(originalTable, "FECHA", "VALOR");
@@ -92,8 +92,8 @@ describe('When pivoting a Table...', function() {
     });
     it('The pivoted table should have the expected content', function() {
         var pivotedTable = pivot(originalTable, "FECHA", "VALOR");
-        var pivotedCellNameAt14 = pivotedTable.row(1).nameAt(4);
-        var pivotedCellValueAt14 = pivotedTable.row(1).valueAt(4);
+        var pivotedCellNameAt14 = pivotedTable.row(1).nameAt(3);
+        var pivotedCellValueAt14 = pivotedTable.row(1).valueAt(3);
         expect(pivotedCellNameAt14).to.equal("FEBRERO");
         expect(pivotedCellValueAt14).to.equal(31);
     });
