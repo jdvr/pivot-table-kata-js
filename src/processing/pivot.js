@@ -8,16 +8,16 @@ const uniqWith = require('lodash/fp').uniqWith;
 const isEqual = require('lodash/fp').isEqual;
 const concat = require('lodash/fp').concat;
 
-function uniqValues(headerColumn, rows) {
-    return flow(
-        map(row => row.valueAtName(headerColumn)),
-        uniqWith(isEqual)
-    )(rows);
-}
+const distinctValues = mapFunction => flow(
+    map(mapFunction),
+    uniqWith(isEqual)
+);
+
 function pivot(table, headerColumn, valueColumn) {
+
     const headers = concat(
         filter(header => header !== headerColumn && header !== valueColumn)(table.header),
-        uniqValues(headerColumn, table.rows)
+        distinctValues(row => row.valueAtName(headerColumn))(table.rows)
     );
     return new Table(headers, table.rows);
 }
