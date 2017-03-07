@@ -13,6 +13,7 @@
   "dependencies": {
     "chai": "^2.0.0",
     "console.table": "^0.7.0",
+    "lodash": "^4.17.4",
     "mocha": "^2.0.1",
     "sinon": "^1.12.1",
     "sinon-chai": "^2.7.0"
