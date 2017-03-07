@@ -1,23 +1,24 @@
-var Table = require('../domain/table.js');
-var Row = require('../domain/row.js');
-var Cell = require('../domain/cell.js');
-var _ = require('lodash');
+const Table = require('../domain/table.js');
+const Row = require('../domain/row.js');
+const Cell = require('../domain/cell.js');
+const flow = require('lodash/fp').flow;
+const map = require('lodash/fp').map;
+const filter = require('lodash/fp').filter;
+const uniqWith = require('lodash/fp').uniqWith;
+const isEqual = require('lodash/fp').isEqual;
+const concat = require('lodash/fp').concat;
 
 function uniqValues(headerColumn, rows) {
-    var values = _.map(rows, function (row) {
-        return row.valueAtName(headerColumn)
-    });
-    return _.uniqWith(values, _.isEqual);
-}
-function removeElements(headers, headerColumn, valueColumn) {
-    return _.filter(headers, function (header) {
-        return header !== headerColumn && header !== valueColumn;
-    });
+    return flow(
+        map(row => row.valueAtName(headerColumn)),
+        uniqWith(isEqual)
+    )(rows);
 }
 function pivot(table, headerColumn, valueColumn) {
-    var headers = _.concat(
-        removeElements(table.header, headerColumn, valueColumn),
-        uniqValues(headerColumn, table.rows));
+    const headers = concat(
+        filter(header => header !== headerColumn && header !== valueColumn)(table.header),
+        uniqValues(headerColumn, table.rows)
+    );
     return new Table(headers, table.rows);
 }
 module.exports = { pivot: pivot };
