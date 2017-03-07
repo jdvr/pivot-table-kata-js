@@ -22,27 +22,28 @@ function keyCalculatorWith(filterFunction) {
     );
 }
 
-function pivot(table, headerColumn, valueColumn) {
-    const filterCellFunction = cell => cell.name !== headerColumn && cell.name !== valueColumn;
-    const keyOf = keyCalculatorWith(filterCellFunction);
+function rowGenerator(headerColumn, valueColumn) {
+    const filterCellPredicate = cell => cell.name !== headerColumn && cell.name !== valueColumn;
+    const keyOf = keyCalculatorWith(filterCellPredicate);
+    return flow(
+        reduce((group, row) => {
+            const rowHash = keyOf(row.cells);
+            const currentCells = group[rowHash] || filter(filterCellPredicate)(row.cells);
+            group[rowHash] = concat(currentCells, new Cell(row.valueAtName(headerColumn), row.valueAtName(valueColumn)));
+            return group;
+        }, {}),
+        map(values),
+        map(value => new Row(value))
+    );
+}
 
+function pivot(table, headerColumn, valueColumn) {
     const headers = concat(
         filter(header => header !== headerColumn && header !== valueColumn)(table.header),
         distinctValues(row => row.valueAtName(headerColumn))(table.rows)
     );
 
-    const rows = flow(
-        reduce((group, row) => {
-            const rowHash = keyOf(row.cells);
-            if (!group[rowHash]) {
-                group[rowHash] = filter(filterCellFunction)(row.cells);
-            }
-            group[rowHash].push(new Cell(row.valueAtName(headerColumn), row.valueAtName(valueColumn)));
-            return group;
-        }, {}),
-        map(values),
-        map(value => new Row(value))
-    )(table.rows);
+    const rows = rowGenerator(headerColumn, valueColumn)(table.rows);
 
     return new Table(headers, rows);
 }
