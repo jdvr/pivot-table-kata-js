@@ -2,7 +2,7 @@ require('console.table');
 
 function inspect(table) {
     console.log("Table contents - (cols, rows): (" + table.numCols() + "," + table.numRows() + ")");
-    
+
     console.log("Headers:")
     console.dir(table.header,{colors:true});
     console.log("Rows:")
@@ -21,10 +21,10 @@ function render(table) {
 }
 function toHtml(table) {
     var container = ["<table>\n"];
-    
+
     var headers = table.header.map(function(h) { return "<th>" + h +"</th>\n"; }).join("");
     container.push("<thead>\n" + headers + "</thead>\n");
-    
+
     var rows = table.rows.map(function(r) {
         return "<tr>\n" + table.header.map(function(h) {
             return "<td>" + r.valueAtName(h) + "</td>\n";
@@ -32,7 +32,7 @@ function toHtml(table) {
     });
     container.push("<tbody>\n" + rows + "</tbody>\n");
     container.push("</table>");
-    
+
     return container.join("");
 }
 

@@ -8,8 +8,8 @@
     "test": "mocha --reporter spec",
     "watch": "mocha --reporter min --watch --recursive test/"
   },
-  "author": "Gordon Grant <gordongrant@dispostable.com>",
-  "license": "MIT",
+  "author": "gezeta-id <gbrachi@idealista.com>",
+  "license": "ISC",
   "dependencies": {
     "chai": "^2.0.0",
     "console.table": "^0.7.0",
