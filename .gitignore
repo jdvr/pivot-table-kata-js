@@ -2,3 +2,4 @@
 .idea/
 *.iml
 .c9
+node_modules/
